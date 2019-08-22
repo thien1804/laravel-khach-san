@@ -69,7 +69,14 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <img width="50rem" class="img-profile rounded-circle"
+                                 src="
+                                        @if(Auth::user()->avatar == null)
+                                            {{asset('images/default-avatar.png')}}
+                                         @else
+                                            {{asset(Auth::user()->avatar)}}
+                                        @endif
+                                    ">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -116,7 +123,13 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header justify-content-center">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%281%29.jpg" alt="avatar" class="rounded-circle img-responsive">
+                <img width="200rem" src="
+                            @if(Auth::user()->avatar == null)
+                                {{asset('images/default-avatar.png')}}
+                            @else
+                                {{Auth::user()->avatar}}
+                            @endif
+                        ">
             </div>
             <!--Body-->
             <div class="modal-body text-center mb-1">
@@ -226,7 +239,7 @@
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+@include('sweetalert::alert')
 <script src="{{asset('cozy/js/jquery.min.js')}}"></script>
 <script src="{{asset('cozy/js/jquery-migrate-3.0.1.min.js')}}"></script>
 <script src="{{asset('cozy/js/popper.min.js')}}"></script>
@@ -243,13 +256,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{{asset('cozy/js/google-map.js')}}"></script>
 <script src="{{asset('cozy/js/main.js')}}"></script>
-
-<script>
-    $(function () {
-        var birth_day = $("#birth-day").val();
-        console.log(new Date(birth_day));
-    });
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+@yield('script')
 </body>
 </html>

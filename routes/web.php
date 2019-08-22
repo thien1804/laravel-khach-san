@@ -28,6 +28,7 @@ Route::prefix('')->group(function (){
 
     Route::prefix('user')->group(function (){
         Route::get('edit', 'UserController@edit')->name('user.edit');
+        Route::put('edit', 'UserController@update')->name('user.update');
     });
 });
 
