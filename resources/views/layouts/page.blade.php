@@ -66,24 +66,6 @@
                         </li>
                     @endif
                 @else
-{{--                    <li class="nav-item dropdown">--}}
-{{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                            {{ Auth::user()->name }} <span class="caret"></span>--}}
-{{--                        </a>--}}
-
-{{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-{{--                            <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                               onclick="event.preventDefault();--}}
-{{--                                                     document.getElementById('logout-form').submit();">--}}
-{{--                                {{ __('Logout') }}--}}
-{{--                            </a>--}}
-
-{{--                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-{{--                                @csrf--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
@@ -105,8 +87,17 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </a>
                         </div>
                     </li>
@@ -129,7 +120,7 @@
             </div>
             <!--Body-->
             <div class="modal-body text-center mb-1">
-                <h5 class="mt-1 mb-2">{{Auth::user()->name}}</h5>
+                <h5 class="mt-1 mb-2">@auth{{Auth::user()->name}}@endauth</h5>
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
@@ -139,19 +130,19 @@
                 <div class="form-group row">
                     <label for="bird-day" class="col-sm-2 col-form-label">Bird day</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control-plaintext" id="bird-day" value="{{Auth::user()->bird_day}}" readonly>
+                        <input type="date" class="form-control-plaintext" id="bird-day" value="@auth{{Auth::user()->bird_day}}@endauth" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="address" class="col-sm-2 col-form-label">Address</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="address" value="{{Auth::user()->address}}" readonly>
+                        <input type="text" class="form-control-plaintext" id="address" value="@auth{{Auth::user()->address}}@endauth" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="phone-number" class="col-sm-2 col-form-label">Phone number</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="phone-number" value="{{Auth::user()->phone_number}}" readonly>
+                        <input type="text" class="form-control-plaintext" id="phone-number" value="@auth{{Auth::user()->phone_number}}@endauth" readonly>
                     </div>
                 </div>
                 <div class="text-center mt-4">
