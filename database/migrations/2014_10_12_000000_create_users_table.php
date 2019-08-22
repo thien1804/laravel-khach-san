@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->text('address')->nullable();
-            $table->dateTime('birth_day')->nullable();
+            $table->date('birth_day')->nullable();
             $table->string('phone_number',20)->nullable();
             $table->smallInteger('status')->nullable();
             $table->rememberToken();

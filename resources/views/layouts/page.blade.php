@@ -124,13 +124,13 @@
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="email" value="email@example.com">
+                        <input type="text" readonly class="form-control-plaintext" id="email" value="@auth{{Auth::user()->email}}@endauth">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="bird-day" class="col-sm-2 col-form-label">Bird day</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control-plaintext" id="bird-day" value="@auth{{Auth::user()->bird_day}}@endauth" readonly>
+                        <input type="date" class="form-control-plaintext" id="birth-day" value="@auth{{Auth::user()->birth_day}}@endauth" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -147,7 +147,7 @@
                 </div>
                 <div class="text-center mt-4">
                     <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary"><a href="{{route('user.edit')}}">Edit</a></button>
+                    <button class="btn btn-link"><a href="{{route('user.edit')}}">Edit</a></button>
                 </div>
             </div>
         </div>
@@ -243,6 +243,13 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{{asset('cozy/js/google-map.js')}}"></script>
 <script src="{{asset('cozy/js/main.js')}}"></script>
+
+<script>
+    $(function () {
+        var birth_day = $("#birth-day").val();
+        console.log(new Date(birth_day));
+    });
+</script>
 
 </body>
 </html>
