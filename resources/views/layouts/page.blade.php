@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{asset('cozy/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('cozy/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('cozy/css/style.css')}}">
+    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
 
