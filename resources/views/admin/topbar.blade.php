@@ -151,11 +151,18 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <img class="img-profile rounded-circle"
+                     src="
+                        @if(Auth::user()->avatar == null)
+                            {{asset('images/default-avatar.png')}}
+                     @else
+                        {{Auth::user()->avatar}}
+                     @endif
+                        ">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalLoginAvatar">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>
@@ -178,3 +185,47 @@
     </ul>
 
 </nav>
+@auth
+    <!--Modal: Profile with Avatar Form-->
+    <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog cascading-modal modal-avatar modal-lg" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header justify-content-center">
+                    <img width="200rem" src="
+                            @if(Auth::user()->avatar == null)
+                    {{asset('images/default-avatar.png')}}
+                    @else
+                    {{Auth::user()->avatar}}
+                    @endif
+                        ">
+                </div>
+                <!--Body-->
+                <div class="modal-body text-center mb-1">
+                    <h5 class="mt-1 mb-2">{{Auth::user()->name}}</h5>
+                    <div class="form-group row">
+                        <label for="username" class="col-sm-2 col-form-label">User name</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="username" value="{{Auth::user()->username}}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" id="email" value="{{Auth::user()->email}}" readonly>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button class="btn btn-link"><a href="{{route('user.edit')}}">Edit</a></button>
+                    </div>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: Profile with Avatar Form-->
+@endauth
+

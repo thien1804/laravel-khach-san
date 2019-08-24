@@ -115,7 +115,7 @@
     </div>
 </nav>
 <!-- END nav -->
-
+@auth
 <!--Modal: Profile with Avatar Form-->
 <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -134,29 +134,29 @@
             </div>
             <!--Body-->
             <div class="modal-body text-center mb-1">
-                <h5 class="mt-1 mb-2">@auth{{Auth::user()->name}}@endauth</h5>
+                <h5 class="mt-1 mb-2">{{Auth::user()->name}}</h5>
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="email" value="@auth{{Auth::user()->email}}@endauth">
+                        <input type="text" readonly class="form-control-plaintext" id="email" value="{{Auth::user()->email}}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="bird-day" class="col-sm-2 col-form-label">Bird day</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control-plaintext" id="birth-day" value="@auth{{Auth::user()->birth_day}}@endauth" readonly>
+                        <input type="date" class="form-control-plaintext" id="birth-day" value="{{Auth::user()->birth_day}}" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="address" class="col-sm-2 col-form-label">Address</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="address" value="@auth{{Auth::user()->address}}@endauth" readonly>
+                        <input type="text" class="form-control-plaintext" id="address" value="{{Auth::user()->address}}" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="phone-number" class="col-sm-2 col-form-label">Phone number</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="phone-number" value="@auth{{Auth::user()->phone_number}}@endauth" readonly>
+                        <input type="text" class="form-control-plaintext" id="phone-number" value="{{Auth::user()->phone_number}}" readonly>
                     </div>
                 </div>
                 <div class="text-center mt-4">
@@ -169,7 +169,7 @@
     </div>
 </div>
 <!--Modal: Profile with Avatar Form-->
-
+@endauth
 @yield('content')
 
 <footer class="ftco-footer ftco-bg-dark ftco-section">
