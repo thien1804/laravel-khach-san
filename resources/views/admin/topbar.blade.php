@@ -156,7 +156,7 @@
                         @if(Auth::user()->avatar == null)
                             {{asset('images/default-avatar.png')}}
                      @else
-                        {{Auth::user()->avatar}}
+                        {{asset(Auth::user()->avatar)}}
                      @endif
                         ">
             </a>
@@ -198,7 +198,7 @@
                             @if(Auth::user()->avatar == null)
                     {{asset('images/default-avatar.png')}}
                     @else
-                    {{Auth::user()->avatar}}
+                    {{asset(Auth::user()->avatar)}}
                     @endif
                         ">
                 </div>
@@ -219,7 +219,7 @@
                     </div>
                     <div class="text-center mt-4">
                         <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button class="btn btn-link"><a href="{{route('user.edit')}}">Edit</a></button>
+                        <button class="btn btn-link"><a href="{{route('admin.edit.info')}}">Edit</a></button>
                     </div>
                 </div>
             </div>

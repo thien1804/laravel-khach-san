@@ -44,4 +44,6 @@ Route::prefix('admin')->group(function (){
     Route::get('password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
 
     Route::get('dashboard','AdminController@index')->name('admin.dashboard');
+    Route::get('edit-info','AdminController@edit')->name('admin.edit.info');
+    Route::put('edit-info','AdminController@update')->name('admin.update.info');
 });

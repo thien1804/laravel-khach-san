@@ -128,7 +128,7 @@
                             @if(Auth::user()->avatar == null)
                                 {{asset('images/default-avatar.png')}}
                             @else
-                                {{Auth::user()->avatar}}
+                                {{asset(Auth::user()->avatar)}}
                             @endif
                         ">
             </div>
