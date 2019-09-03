@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function (){
     Route::put('edit-info','AdminController@update')->name('admin.info.update');
 
     Route::prefix('slider')->group(function (){
-        Route::get('','SliderController@index');
+        Route::get('','SliderController@index')->name('admin.slider');
         Route::post('','SliderController@store')->name('admin.slider.store');
         Route::get('edit/{id}','SliderController@edit')->name('admin.slider.edit');
         Route::put('edit/{id}','SliderController@update')->name('admin.slider.update');
