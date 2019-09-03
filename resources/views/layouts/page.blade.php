@@ -73,9 +73,9 @@
                             <img width="50rem" class="img-profile rounded-circle"
                                  src="
                                         @if(Auth::user()->avatar == null)
-                                            {{asset('images/default-avatar.png')}}
+                                            {{asset('storage/default_images/default-avatar.png')}}
                                          @else
-                                            {{asset(Auth::user()->avatar)}}
+                                            {{asset('storage/avatar_user_images/'.Auth::user()->avatar)}}
                                         @endif
                                     ">
                         </a>
@@ -126,9 +126,9 @@
             <div class="modal-header justify-content-center">
                 <img width="200rem" src="
                             @if(Auth::user()->avatar == null)
-                                {{asset('images/default-avatar.png')}}
+                                {{asset('storage/default_images/default-avatar.png')}}
                             @else
-                                {{asset(Auth::user()->avatar)}}
+                                {{asset('storage/avatar_user_images/'.Auth::user()->avatar)}}
                             @endif
                         ">
             </div>
@@ -258,6 +258,7 @@
 <script src="{{asset('cozy/js/google-map.js')}}"></script>
 <script src="{{asset('cozy/js/main.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
 @yield('script')
 </body>
 </html>

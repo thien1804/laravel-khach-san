@@ -44,6 +44,14 @@ Route::prefix('admin')->group(function (){
     Route::get('password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
 
     Route::get('dashboard','AdminController@index')->name('admin.dashboard');
-    Route::get('edit-info','AdminController@edit')->name('admin.edit.info');
-    Route::put('edit-info','AdminController@update')->name('admin.update.info');
+    Route::get('edit-info','AdminController@edit')->name('admin.info.edit');
+    Route::put('edit-info','AdminController@update')->name('admin.info.update');
+
+    Route::prefix('slider')->group(function (){
+        Route::get('','SliderController@index');
+        Route::post('','SliderController@store')->name('admin.slider.store');
+        Route::get('edit/{id}','SliderController@edit')->name('admin.slider.edit');
+        Route::put('edit/{id}','SliderController@update')->name('admin.slider.update');
+        Route::delete('destroy/{id}','SliderController@destroy')->name('admin.slider.destroy');
+    });
 });

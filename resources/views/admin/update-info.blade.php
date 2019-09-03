@@ -25,7 +25,7 @@
                         @endif
                         <hr>
                         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data"
-                              action="{{route('admin.update.info')}}" id="update-info-form">
+                              action="{{route('admin.info.update')}}" id="update-info-form">
                             @method('PUT')
                             @csrf
                             <div class="row">
@@ -35,9 +35,9 @@
                                         <img id="img-avatar" class="img-profile rounded-circle" width="200 rem"
                                              src=
                                         @if(Auth::user()->avatar == null)
-                                            {{asset('images/default-avatar.png')}}
+                                            {{asset('storage/default_images/default-avatar.png')}}
                                             @else
-                                            {{asset(Auth::user()->avatar)}}
+                                            {{asset('storage/avatar_admin_images/'.Auth::user()->avatar)}}
                                             @endif
                                         >
                                         <h6>Upload a different photo...</h6>

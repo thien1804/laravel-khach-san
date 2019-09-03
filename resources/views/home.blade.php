@@ -1,64 +1,20 @@
-{{--@extends('layouts.app')--}}
 
-{{--@section('content')--}}
-{{--<div class="container">--}}
-{{--    <div class="row justify-content-center">--}}
-{{--        <div class="col-md-8">--}}
-{{--            <div class="card">--}}
-{{--                <div class="card-header">Dashboard</div>--}}
-
-{{--                <div class="card-body">--}}
-{{--                    @if (session('status'))--}}
-{{--                        <div class="alert alert-success" role="alert">--}}
-{{--                            {{ session('status') }}--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-
-{{--                    You are logged in!--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
-{{--@endsection--}}
 @extends('layouts.page')
 @section('content')
     <section class="home-slider owl-carousel">
-        <div class="slider-item" style="background-image: url({{asset('cozy/images/bg_1.jpg')}});">
+        @foreach($sliders as $slider)
+        <div class="slider-item" style="background-image: url({{asset('storage/slider_images/'.$slider->image)}});">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row slider-text align-items-center justify-content-start">
                     <div class="col-md-6 col-sm-12 ftco-animate">
-                        <h1 class="mb-4">Welcome to Cozy the paradize near the blue sea</h1>
+                        <h1 class="mb-4">{{$slider->description}}</h1>
                         <p><a href="https://vimeo.com/45830194" class="btn btn-primary btn-outline-white px-4 py-3 popup-vimeo"><span class="ion-ios-play mr-2"></span> Watch Video</a></p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="slider-item" style="background-image: url({{asset('cozy/images/bg_2.jpg')}});">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text align-items-center justify-content-start">
-                    <div class="col-md-6 col-sm-12 ftco-animate">
-                        <h1 class="mb-4">Book the perfect accomodations without breaking the bank</h1>
-                        <p><a href="https://vimeo.com/45830194" class="btn btn-primary btn-outline-white px-4 py-3 popup-vimeo"><span class="ion-ios-play mr-2"></span> Watch Video</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slider-item" style="background-image: url({{asset('cozy/images/bg_3.jpg')}});">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text align-items-center justify-content-start">
-                    <div class="col-md-6 col-sm-12 ftco-animate">
-                        <h1 class="mb-4">Lets go to discovering</h1>
-                        <p><a href="https://vimeo.com/45830194" class="btn btn-primary btn-outline-white px-4 py-3 popup-vimeo"><span class="ion-ios-play mr-2"></span> Watch Video</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </section>
     <!-- END slider -->
 

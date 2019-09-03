@@ -154,9 +154,9 @@
                 <img class="img-profile rounded-circle"
                      src="
                         @if(Auth::user()->avatar == null)
-                            {{asset('images/default-avatar.png')}}
+                            {{asset('storage/default_images/default-avatar.png')}}
                      @else
-                        {{asset(Auth::user()->avatar)}}
+                        {{asset('storage/avatar_admin_images/'.Auth::user()->avatar)}}
                      @endif
                         ">
             </a>
@@ -196,9 +196,9 @@
                 <div class="modal-header justify-content-center">
                     <img width="200rem" src="
                             @if(Auth::user()->avatar == null)
-                    {{asset('images/default-avatar.png')}}
+                    {{asset('storage/default_images/default-avatar.png')}}
                     @else
-                    {{asset(Auth::user()->avatar)}}
+                    {{asset('storage/avatar_admin_images/'.Auth::user()->avatar)}}
                     @endif
                         ">
                 </div>
@@ -219,7 +219,7 @@
                     </div>
                     <div class="text-center mt-4">
                         <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button class="btn btn-link"><a href="{{route('admin.edit.info')}}">Edit</a></button>
+                        <button class="btn btn-link"><a href="{{route('admin.info.edit')}}">Edit</a></button>
                     </div>
                 </div>
             </div>

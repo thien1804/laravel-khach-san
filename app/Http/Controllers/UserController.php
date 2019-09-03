@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 class UserController extends Controller
 {
@@ -32,9 +33,14 @@ class UserController extends Controller
         $user->address = $address;
 
         if ($request->hasFile('avatar')) {
-            $imageName = time().'.'.$request->avatar->getClientOriginalExtension();
-            $request->avatar->move(public_path('images'), $imageName);
-            $user->avatar = "images/".$imageName;
+            Storage::disk('public')->delete('avatar_admin_images/'.$user->avatar);
+            $filenameWithExt = $request->file('avatar')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('avatar')->storeAs('public/avatar_user_images/',$filenameToStore);
+
+            $user->avatar = $filenameToStore;
             $user->save();
         }else{
             $user->save();
