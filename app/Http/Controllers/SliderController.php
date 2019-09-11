@@ -56,7 +56,7 @@ class SliderController extends Controller
 
         $slider->image = $filenameToStore;
         $slider->save();
-        Alert::success('Success', 'You have successfully update your information.');
+        Alert::success('Success', 'You have successfully create new slider.');
         return redirect()->back();
     }
 

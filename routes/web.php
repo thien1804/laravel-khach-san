@@ -54,4 +54,12 @@ Route::prefix('admin')->group(function (){
         Route::put('edit/{id}','SliderController@update')->name('admin.slider.update');
         Route::delete('destroy/{id}','SliderController@destroy')->name('admin.slider.destroy');
     });
+
+    Route::prefix('food-type')->group(function (){
+        Route::get('','FoodTypeController@index')->name('admin.food-type');
+        Route::post('','FoodTypeController@store')->name('admin.food-type.store');
+        Route::get('edit/{id}','FoodTypeController@edit')->name('admin.food-type.edit');
+        Route::put('edit/{id}','FoodTypeController@update')->name('admin.food-type.update');
+        Route::delete('destroy/{id}','FoodTypeController@destroy')->name('admin.food-type.destroy');
+    });
 });

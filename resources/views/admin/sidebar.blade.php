@@ -100,6 +100,13 @@
             <span>Sliders</span></a>
     </li>
 
+    <!-- Nav Item - Food types -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.food-type')}}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Food types</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
