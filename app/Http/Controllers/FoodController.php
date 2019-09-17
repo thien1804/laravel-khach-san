@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Food;
+use App\Food_type;
 use App\Slider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class SliderController extends Controller
+class FoodController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,9 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $sliders = Slider::paginate(15);
-        return view('admin.sliders.index',['sliders' => $sliders]);
+        $foods = Food::paginate(15);
+        $food_types = Food_type::all();
+        return view('admin.food.index',['foods' => $foods, 'food_types' => $food_types]);
     }
 
     /**
@@ -37,25 +39,27 @@ class SliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(Request $request)
     {
-        $slider = new Slider();
-        $slider->level = $request->input('level');
-        $slider->description = $request->input('description');
+        $food = new Food();
+        $food->name = $request->input('name');
+        $food->food_type_id = $request->input('food-type');
+        $food->level = $request->input('level');
+        $food->description = $request->input('description');
+        $food->price = $request->input('price');
 
         if ($request->hasFile('image')) {
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();
             $filenameToStore = $filename.'_'.time().'.'.$extension;
-            $path = $request->file('image')->storeAs('public/slider_images/',$filenameToStore);
+            $path = $request->file('image')->storeAs('public/food_images/',$filenameToStore);
         }else{
             $filenameToStore = 'noimage.jpg';
         }
 
-        $slider->image = $filenameToStore;
-        $slider->save();
+        $food->image = $filenameToStore;
+        $food->save();
         Alert::success('Success', 'You have successfully create new slider.');
         return redirect()->back();
     }
@@ -63,10 +67,10 @@ class SliderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Slider  $slider
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Slider $slider)
+    public function show($id)
     {
         //
     }
@@ -74,65 +78,63 @@ class SliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Slider  $slider
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $slider = Slider::find($id);
-        return view('admin.sliders.edit',['slider' => $slider]);
+        $food = Food::find($id);
+        $food_types = Food_type::all();
+        return view('admin.food.edit', ['food' => $food, 'food_types' => $food_types]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Slider  $slider
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $slider = Slider::find($id);
-        $slider->description = $request->input('description');
-        $slider->level = $request->input('level');
+        $food = Food::find($id);
+        $food->description = $request->input('description');
+        $food->level = $request->input('level');
+        $food->price = $request->input('price');
+        $food->food_type_id = $request->input('food-type');
 
         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete('slider_images/'.$slider->image);
+            Storage::disk('public')->delete('food_images/'.$food->image);
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();
             $filenameToStore = $filename.'_'.time().'.'.$extension;
-            $path = $request->file('image')->storeAs('public/slider_images/',$filenameToStore);
+            $path = $request->file('image')->storeAs('public/food_images/',$filenameToStore);
 
-            $slider->image = $filenameToStore;
-            $slider->save();
+            $food->image = $filenameToStore;
+            $food->save();
         }else{
-            $slider->save();
+            $food->save();
         }
-        Alert::success('Success', 'You have successfully update slider.');
+        Alert::success('Success', 'You have successfully update food.');
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Slider  $slider
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $slider = Slider::find($id);
-        Storage::disk('public')->delete('slider_images/'.$slider->image);
-        $slider->delete();
+        $food = Food::find($id);
+        Storage::disk('public')->delete('food_images/'.$food->image);
+        $food->delete();
         Alert::success('Deleted!', 'Your file has been deleted.');
         return redirect()->back();
     }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth:admin');
